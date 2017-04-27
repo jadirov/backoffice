@@ -1,0 +1,35 @@
+# This file is a "template" of what your parameters.yml file should look like
+# Set parameters here that may be different on each deployment target of the app, e.g. development, staging, production.
+# http://symfony.com/doc/current/best_practices/configuration.html#infrastructure-related-configuration
+parameters:
+    database_host:     127.0.0.1
+    database_port:     ~
+    database_name:     symfony
+    database_user:     root
+    database_password: ~
+    # You should uncomment this if you want use pdo_sqlite
+    # database_path: "%kernel.root_dir%/data.db3"
+
+    mailer_transport:  smtp
+    mailer_host:       127.0.0.1
+    mailer_user:       ~
+    mailer_password:   ~
+
+    # A secret key that's used to generate certain security-related tokens
+    secret:            ThisTokenIsNotSoSecretChangeIt
+    ldap_host: 10.0.0.100
+    ldap_port: 389
+    ldap_version: 3
+    ldap_ssl: false
+    ldap_tls: false
+    
+    ldap_user: 'compte@user.com'
+    ldap_pass: root
+    ldap_base_dn: 'DC=42groupe,DC=cloud'
+    ldap_search_dn: 'CN=username,CN=Users,DC=42groupe,DC=cloud'
+    ldap_uid_key: userPrincipalName
+    ldap_search_filter: '(userPrincipalName={username})'
+    ldap_dn_string: 'CN={username},CN=Users,DC=42groupe,DC=cloud'
+    recaptcha_key_secret: ~
+    recaptcha_key_site: ~
+

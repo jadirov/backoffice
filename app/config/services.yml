@@ -1,0 +1,54 @@
+# Learn more about services, parameters and containers at
+# http://symfony.com/doc/current/book/service_container.html
+parameters:
+#    parameter_name: value
+
+services:
+    ldap:
+        class: Symfony\Component\Ldap\LdapClient
+        arguments:
+            - "%ldap_host%"     # host
+            - "%ldap_port%"     # port
+            - "%ldap_version%"  # version
+            - "%ldap_ssl%"      # SSL
+            - "%ldap_tls%"      # TLS
+            
+    form_authenticator:
+          class: BackBundle\Security\FormAuthenticator
+          arguments: 
+            - "@router"
+            - "@ldap_service"
+            
+    ldap_service:
+          class: BackBundle\Service\LdapService
+          arguments: 
+            - "%ldap_host%"     # host
+            - "%ldap_base_dn%"     # user
+            - "%ldap_user%"     # user
+            - "%ldap_pass%"     # pass
+            - "%ldap_port%"     # port
+            - "%ldap_version%"  # version
+            - "%ldap_ssl%"      # SSL
+            - "%ldap_tls%"      # TLS
+          
+#        arguments: [ '%active_directory_tree%','%active_directory_ip_server%','%active_directory_user%','%active_directory_pass%']
+    
+    back.user_provider:
+        class: BackBundle\Security\User\UserProvider
+        arguments:
+            - "@fos_user.user_manager"
+            - "@ldap"
+            - "%ldap_base_dn%"
+            - "%ldap_search_dn%"
+            - "%ldap_pass%"
+#            - "%ldap_default_roles%"
+            - "%ldap_uid_key%"
+            - "%ldap_search_filter%"
+
+#    service_name:
+#        class: AppBundle\Directory\ClassName
+#        arguments: ["@another_service_name", "plain_value", "%parameter_name%"]
+    back_upload_service:
+        class: BackBundle\Service\UploadImage
+        arguments:
+          - "@upload_service"

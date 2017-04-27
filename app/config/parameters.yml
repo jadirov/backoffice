@@ -1,0 +1,26 @@
+# This file is auto-generated during the composer install
+parameters:
+    database_host: 127.0.0.1
+    database_port: 3306
+    database_name: ad
+    database_user: root
+    database_password: root
+    mailer_transport: smtp
+    mailer_host: 127.0.0.1
+    mailer_user: null
+    mailer_password: null
+    secret: ThisTokenIsNotSoSecretChangeIt
+    ldap_host: 34.251.31.182
+    ldap_port: 389
+    ldap_version: 3
+    ldap_ssl: false
+    ldap_tls: false
+    ldap_user: administrator@42groupe.cloud
+    ldap_pass: Mtvc2016
+    ldap_base_dn: 'DC=42groupe,DC=cloud'
+    ldap_search_dn: 'CN=Administrator,CN=Users,DC=42groupe,DC=cloud'
+    ldap_uid_key: userPrincipalName
+    ldap_search_filter: '(userPrincipalName={username})'
+    ldap_dn_string: 'CN={username},CN=Users,DC=42groupe,DC=cloud'
+    recaptcha_key_secret: 6Lciqh4TAAAAAI1nPyWYOMKLtLj3lEWWJL0EsoDG
+    recaptcha_key_site: 6Lciqh4TAAAAAKxobpDQVXPCRTkNFXtlGUVqwjEW

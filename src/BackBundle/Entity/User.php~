@@ -1,0 +1,278 @@
+<?php
+
+namespace BackBundle\Entity;
+
+
+use Doctrine\ORM\Mapping as ORM;
+use FOS\UserBundle\Model\User as BaseUser;
+use Gedmo\Mapping\Annotation As Gedmo;
+
+/**
+ * User
+ *
+ * @ORM\Table(name="user")
+ * @ORM\Entity(repositoryClass="BackBundle\Repository\UserRepository")
+ */
+class User extends BaseUser
+{
+    const ROLE_USER = 'ROLE_USER';
+    const ROLE_ADMIN = 'ROLE_ADMIN';
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    protected $id;
+
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="dn", type="string", length=255)
+     */
+    private $dn;
+
+    /**
+     * @var boolean
+     *
+     * */
+    protected $logged;
+    
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="firstName", type="string", length=255)
+     */
+    private $firstName;
+      
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="lastName", type="string", length=255)
+     */
+    private $lastName;
+    
+    
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="s_am_account_name", type="string", length=255)
+     */
+    private $sAMAccountName;  /**
+     * @var string
+     *
+     * @ORM\Column(name="fullName", type="string", length=255)
+     */
+    private $fullName;
+    
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="address", type="string", length=255)
+     */
+    private $address;
+    /**  /**
+     * @var string
+     *
+     * @ORM\Column(name="phone", type="string", length=255)
+     */
+    private $phone;
+ /**
+     * @var string
+     *
+     * @ORM\Column(name="mobile", type="string", length=255)
+     */
+    private $mobile;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="city", type="string", length=255)
+     */
+    private $city;
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="country", type="string", length=255)
+     */
+    private $country;
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="postalCode", type="string", length=255)
+     */
+    private $postalCode;
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="office", type="string", length=255)
+     */
+    private $office;
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="service", type="string", length=255)
+     */
+    private $service;
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="group", type="string", length=255)
+     */
+    private $group;
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="groupNotSelect", type="string", length=255)
+     */
+    private $groupNotSelect;  
+    
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="adminCount", type="string", length=255)
+     */
+    private $adminCount;
+
+    /**
+     * @var text
+     *
+     * @ORM\Column(name="description", type="string", length=255)
+     */
+    private $description;
+    
+
+    /**
+     * User constructor.
+     */
+    public function __construct()
+    {
+        parent::__construct();
+        $this->logged = false;
+
+    }
+    /* GETTERS AND SETTERS*/
+
+
+    /**
+     * Set dn
+     *
+     * @param string $dn
+     * @return User
+     */
+    public function setDn($dn)
+    {
+        $this->dn = $dn;
+
+        return $this;
+    }
+
+
+    /**
+     * Get dn
+     *
+     * @return string
+     */
+    public function getDn()
+    {
+        return $this->dn;
+    }
+
+    /**
+     * Set dn
+     *
+     * @param boolean $logged
+     * @return User
+     */
+    public function setLogged($logged)
+    {
+        $this->logged = $logged;
+
+        return $this;
+    }
+
+
+    /**
+     * Get logged
+     *
+     * @return string
+     */
+    public function getLogged()
+    {
+        return $this->logged;
+    }
+
+    /*  -------  -----  ------  ---- ------*/
+    /**
+     * @param $array
+     * @param $attr
+     * @return null
+     */
+    function getData($array, $attr)
+    {
+        return isset($array[0][$attr][0]) ? $array[0][$attr][0] : null;
+    }
+
+    public function init($data)
+    {
+        if (!empty($data)) {
+            $this->setDn($this->getData($data, "distinguishedname"));
+            $this->setLastName($this->getData($data, "cn"));
+            $this->setFirstName($this->getData($data, "givenname"));
+
+        }
+        
+        return $this;
+    }
+
+    /**
+     * Set firstName
+     *
+     * @param string $firstName
+     *
+     * @return User
+     */
+    public function setFirstName($firstName)
+    {
+        $this->firstName = $firstName;
+
+        return $this;
+    }
+
+    /**
+     * Get firstName
+     *
+     * @return string
+     */
+    public function getFirstName()
+    {
+        return $this->firstName;
+    }
+
+    /**
+     * Set lastName
+     *
+     * @param string $lastName
+     *
+     * @return User
+     */
+    public function setLastName($lastName)
+    {
+        $this->lastName = $lastName;
+
+        return $this;
+    }
+
+    /**
+     * Get lastName
+     *
+     * @return string
+     */
+    public function getLastName()
+    {
+        return $this->lastName;
+    }
+}

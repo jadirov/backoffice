@@ -1,0 +1,8 @@
+services:
+    back_upload_service:
+        class: BackBundle\Service\UploadImage
+        arguments: ["@service_container", %back.jpeg_quality%]
+    
+#    back.example:
+#        class: BackBundle\Example
+#        arguments: ["@service_id", "plain_value", "%parameter%"]
